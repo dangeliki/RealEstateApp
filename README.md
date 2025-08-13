@@ -1,2 +1,2 @@
 # RealEstateApp
-Final Project for Coding Factory
+Final Project for Coding Factory by AUEB
