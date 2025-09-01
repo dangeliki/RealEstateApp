@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import OAth from '../components/OAth';
 
 // Για να κρατάει το πεδίο όταν το συμπληρώσουμε και πάμε στο επόμενο πεδίο
 export default function Signup() {
@@ -58,6 +59,14 @@ export default function Signup() {
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80'>
           {loading ? 'Loading...' : 'Sign Up'}
         </button>
+
+        {/* Κουμπί Google */}
+        <button>
+          <OAth>
+                    
+          </OAth>
+        </button>
+
       </form>
       {/* Σύνδεση αν ο χρήστης έχει ήδη λογαριασμό */}
       <div className='flex gap-2 mt-5'>

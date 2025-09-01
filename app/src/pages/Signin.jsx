@@ -2,45 +2,42 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart,signInFailure,signInSuccess } from '../redux/user/userSlice';
+import OAth from '../components/OAth';
 
 // Για να κρατάει το πεδίο όταν το συμπληρώσουμε και πάμε στο επόμενο πεδίο
-export default function Signin() {
-  const [formData, setFormData]= useState({});
-  const {loading,error} = useSelector((state) => state.user);
+export default function SignIn() {
+  const [formData, setFormData] = useState({});
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({
-      ...formData, 
+      ...formData,
       [e.target.id]: e.target.value,
     });
   };
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-
-    try{
+    try {
       dispatch(signInStart());
-
-    const res= await fetch('/api/auth/signin',{
-      method:'POST',
-      headers: {
-        'Content-Type' : 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-    console.log(data);
-
-    if(data.success === false) {
-      dispatch(signInFailure(data.message));
-      return;
-    }
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success === false) {
+        dispatch(signInFailure(data.message));
+        return;
+      }
 
     // Αν υπάρχει από πριν το error, αν διορθωθεί η εγγραφή , εξαφανίζεται το error. Αν όλα πάνε καλά και δημιουργηθεί ο χρήστης, οδηγούμαστε στην σελίδα sign-in
     dispatch(signInSuccess(data));
-    navigate('/');
-  } catch (error) {
+      navigate('/');
+    } catch (error) {
       dispatch(signInFailure(error.message));
     }
   };
@@ -60,6 +57,9 @@ export default function Signin() {
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80'>
           {loading ? 'Loading...' : 'Sign In'}
         </button>
+
+        {/* Κουμπί Google */}
+        <OAth/>
       </form>
       {/* Σύνδεση αν ο χρήστης έχει ήδη λογαριασμό */}
       <div className='flex gap-2 mt-5'>
