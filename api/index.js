@@ -1,8 +1,9 @@
-import express from 'express'
+import express from 'express';
 import mongoose, { connect } from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/users.route.js';
 import authRouter from './routes/auth.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config({ path: "../.env" });
 
@@ -17,6 +18,8 @@ const app = express();
 
 // Για να μπορώ να στειλω json requests
 app.use(express.json());
+
+app.use(cookieParser());
 
 // Callback για να ακουσει την πορτα 3000
 app.listen(3000, () => {
