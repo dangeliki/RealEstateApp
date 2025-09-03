@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux'
 import { updateUserStart, updateUserSuccess,updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
@@ -75,10 +76,19 @@ export default function Profile() {
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <img src={currentUser.avatar} alt="profile" className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' />
+        
         <input type="text" id='username' placeholder='username' defaultValue={currentUser.username} className='border p-3 rounded-lg' onChange={handleChange}/>
+        
         <input type="email" id='email' placeholder='email' defaultValue={currentUser.email} className='border p-3 rounded-lg' onChange={handleChange}/>
+        
         <input type="password" id='password' placeholder='password' className='border p-3 rounded-lg' onChange={handleChange}/>
+        
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 hover:opacity-95 disabled:opacity-80'>{loading ? 'Loading..' : 'Update'}</button>
+
+        <Link className='bg-green-700 text-white p-3 rounded-lg text-center hover:opacity-95' to={"/create-listing"} >
+          Create Listing
+        </Link>
+
       </form>
 
       <div className='flex justify-between mt-5'>

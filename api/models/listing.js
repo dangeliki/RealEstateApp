@@ -18,6 +18,11 @@ const listingSchema = new mongoose.Schema(
             type:Number,
             required: true,
         },
+        phone: {
+        type: String,
+        required: true,
+        match: [/^\d{10}$/],
+        },
         bathrooms: {
             type:Number,
             required: true,
