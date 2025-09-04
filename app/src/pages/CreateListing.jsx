@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CreateListing() {
 
     const [formData, setFormData] = useState({
-        title: '',
+        summary: '',
         description:'',
         address: '',
         type:'rent',
@@ -15,6 +15,7 @@ export default function CreateListing() {
         price: 500,
         parking: false,
         furnished: false,
+        name:'',
     });
 
     const [error,setError] = useState(false);
@@ -85,7 +86,7 @@ export default function CreateListing() {
         <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row'>
 
             <div className='flex flex-col gap-4 flex-1'>
-                <input type="text" placeholder='Title' className='border p-3 rounded-lg' id='title' maxLength='62' minLength='10' required onChange={handleChange} value={formData.title} />
+                <input type="text" placeholder='Summary' className='border p-3 rounded-lg' id='summary' maxLength='62' minLength='10' required onChange={handleChange} value={formData.summary} />
 
                 <textarea type="text" placeholder='Description' className='border p-3 rounded-lg' id='description' required onChange={handleChange} value={formData.description} />
 
