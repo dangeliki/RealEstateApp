@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: "https://images.icon-icons.com/1993/PNG/512/avatar_male_man_people_person_profile_user_icon_123199.png"
+        default: "https://images.icon-icons.com/2468/PNG/512/user_kids_avatar_user_profile_icon_149314.png"
     },
 }, {timestamps:true});
 
