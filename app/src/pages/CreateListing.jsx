@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CreateListing() {
 
+    // Αρχικές τιμές των πεδίων 
     const [formData, setFormData] = useState({
         summary: '',
         description:'',
@@ -24,6 +25,9 @@ export default function CreateListing() {
     const navigate = useNavigate()
 
     console.log(formData);
+
+
+    // Για καθε πεδιο , για να μπορω να αλλάζω τις αρχικες τιμες τους
     const handleChange = (e) => {
         if(e.target.id === 'sell' || e.target.id === 'rent'){
             setFormData({
@@ -47,6 +51,8 @@ export default function CreateListing() {
         }
     } ;
 
+
+    // Για να κανουμε submit τα δεδομενα στην βαση
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

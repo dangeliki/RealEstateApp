@@ -17,6 +17,7 @@ export default function Profile() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  // Διαγραφή λογαριασμού χρήστη
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
@@ -34,6 +35,7 @@ export default function Profile() {
     }
   };
 
+  // Sign Out
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -49,6 +51,8 @@ export default function Profile() {
     }
   };
 
+
+  // Καταχώρηση αλλαγής στα στοιχεία του χρήστη
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -70,6 +74,8 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message));
     }
   }
+
+  // Εμφάνιση καταχωρήσεων ακινήτων
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
@@ -98,7 +104,7 @@ export default function Profile() {
         console.log(data.message);
         return;
       }
-      
+
       setUserListings((prev) => prev.filter((listing) => listing._id !== listingId));
 
     } catch (error) {

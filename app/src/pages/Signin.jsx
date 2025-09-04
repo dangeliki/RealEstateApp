@@ -4,18 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInStart,signInFailure,signInSuccess } from '../redux/user/userSlice';
 import OAth from '../components/OAth';
 
-// Για να κρατάει το πεδίο όταν το συμπληρώσουμε και πάμε στο επόμενο πεδίο
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
