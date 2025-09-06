@@ -1,6 +1,9 @@
 import Listing from "../models/listing.js";
 import { errorHandler } from "../utils/error.js";
 
+
+// Δημιουργία εγγραφής
+
 export const createListing = async (req,rest , next) => {
     try {
         const listing = await Listing.create(req.body);
@@ -9,6 +12,8 @@ export const createListing = async (req,rest , next) => {
         next(error);
     }
 };
+
+// Διαγραφή εγγραφής
 
 export const deleteListing = async (req, res, next) => {
 
@@ -28,5 +33,32 @@ export const deleteListing = async (req, res, next) => {
     } catch(error) {
         next(error);
     }
+
+};
+
+// Επεξεργασία εγγραφής
+
+export const editListing = async ( req,res,next) => {
+    const listing = await Listing.findById(req.params.id);
+
+    if(!listing) {
+        return next(errorHandler(404,'Listing not found'));
+    }
+
+    if(req.user.id !== listing.userRef) {
+        return next(errorHandler(401,'You can only edit your own listing'));
+    }
+
+    try {
+        const editedListing = await Listing.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new:true}
+        );
+        res.status(200).json(editedListing);
+    } catch (error) {
+        next(error);
+    }
+
 
 };
