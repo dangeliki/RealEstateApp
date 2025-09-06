@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { updateUserStart, updateUserSuccess,updateUserFailure, deleteUserFailure, deleteUserStart, deleteUserSuccess, signOutUserStart } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import EditListing from './EditListing.jsx';
 
 export default function Profile() {
   const {currentUser, loading, error} = useSelector((state) => state.user);
@@ -173,7 +174,11 @@ export default function Profile() {
 
           <div className="flex flex-col items-center">
             <button onClick={()=>handleDeleteListing(listing._id)} className="text-red-700">Delete</button>
-            <button className="text-green-700">Edit</button>
+
+            <Link to={`/edit-listing/${listing._id}`}>
+              <button className="text-green-700">Edit</button>
+            </Link>
+            
           </div>
         </div>
       ))}
