@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useParams } from 'react-router-dom';
 
-export default function CreateListing() {
+export default function EditListing() {
 
     // Αρχικές τιμές των πεδίων 
     const [formData, setFormData] = useState({
@@ -23,9 +23,24 @@ export default function CreateListing() {
     const [loading,setLoading] = useState(false);
     const {currentUser} = useSelector(state => state.user)
     const navigate = useNavigate()
+    const params = useParams();
 
-    console.log(formData);
+    // Για να φέρνει πάντα όταν πηγαίνω στην σελίδα το listing id στο url
+    useEffect(() => {
+        const fetchListing = async() => {
+            const listingId = params.listingId;
+            const res = await fetch(`/api/listing/get/${listingId}`);
+            const data = await res.json();
+            if(data.success === false) {
+                console.log(data.message);
+                return;
+            }
+            setFormData(data);
+        };
 
+        fetchListing();
+    } , []
+    );
 
     // Για καθε πεδιο , για να μπορω να αλλάζω τις αρχικες τιμες τους
     const handleChange = (e) => {
@@ -58,7 +73,7 @@ export default function CreateListing() {
         try {
             setLoading(true);
             setError(false);
-            const res = await fetch ('/api/listing/create', {
+            const res = await fetch (`/api/listing/edit/${params.listingId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,8 +100,10 @@ export default function CreateListing() {
 
   return (
     <main className='p-3 max-w-4xl mx-auto'>
+
+        {/* Τίτλος σελίδας */}
       <h1 className='text-3xl font-semibold text-center my-7'>
-        Create a listing
+        Edit a listing
       </h1>
 
         <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row'>
@@ -164,7 +181,7 @@ export default function CreateListing() {
                 </div>
 
                 <button className='p-3 bg-slate-700 text-white rounded-lg hover:opacity-95 disabled:opacity-80'>
-                {loading ? 'Creating...' : 'Create listing'}
+                {loading ? 'Creating...' : 'Edit listing'}
                 </button>
                 {error && <p className='text-red-700 text-sm'>{error}</p>}
             </div>
