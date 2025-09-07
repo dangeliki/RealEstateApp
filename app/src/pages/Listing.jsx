@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import realestateapp from '../assets/realestateapp.png'
 import { FaBath, FaBed, FaChair, FaCopy, FaMapMarkedAlt, FaParking } from 'react-icons/fa';
+import { useSelector } from 'react-redux'
+import Contact from '../components/Contact';
 
 export default function Listing() {
     const [listing,setListing] = useState(null);
@@ -9,6 +11,8 @@ export default function Listing() {
     const [error,setError] = useState(false);
     const [copied,setCopied] = useState(false);
     const params = useParams();
+    const {currentUser} = useSelector((state) => state.user);
+    const [contact, setContact] = useState(false);
 
     useEffect(() =>{
 
@@ -39,7 +43,6 @@ export default function Listing() {
     },[params.listingId]
 );
 
-    console.log(loading);
   return (
 
       <main>
@@ -109,6 +112,14 @@ export default function Listing() {
         
       </ul>
 
+
+      {/* Αποστολή email στον ιδιοκτητη */}
+      {currentUser && listing.userRef !== currentUser._id && !contact && (
+        <button className='bg-slate-700 text-white rounded-lg hover:opacity-95 p-3' onClick={() => setContact(true)}>Contact Owner</button>
+
+      )}
+
+      {contact && <Contact listing = {listing} />}
 
 
             </div>
