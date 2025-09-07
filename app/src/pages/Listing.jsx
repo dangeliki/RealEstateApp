@@ -1,0 +1,86 @@
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import realestateapp from '../assets/realestateapp.png'
+import { FaCopy } from 'react-icons/fa';
+
+export default function Listing() {
+    const [listing,setListing] = useState(null);
+    const [loading,setLoading] = useState(false);
+    const [error,setError] = useState(false);
+    const [copied,setCopied] = useState(false);
+    const params = useParams();
+
+    useEffect(() =>{
+
+        const fetchListing = async() => {
+        try{
+            
+            setLoading(true);
+
+            // Fetch data
+                const res = await fetch(`/api/listing/get/${params.listingId}`);
+                const data = await res.json();
+                if (data.success === false)  {
+                    setError(true);
+                    setLoading(false);
+                    return;
+                }
+                setListing(data);
+                setLoading(false);
+                setError(false);
+            }
+
+            catch (error) {
+                setError(true);
+                setLoading(false);
+            }
+        };
+        fetchListing();
+    },[params.listingId]
+);
+
+    console.log(loading);
+  return (
+
+      <main>
+
+        {/* Loading Effect */}
+      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+      {error && <p className='text-center my-7 text-2xl' >Something went wrong</p>}
+
+
+        {/*If everything is fine, Load Listing */}
+        {listing && !loading && !error && (
+        <div>
+            <img src={realestateapp} className='w-100 mx-auto' alt="Listing" />
+            {/* Για να εμφανίζονται τα στοιχεία της εγγραφής  */}
+            <div className=''>
+            <p>
+                {`${listing.summary} - ${listing.price}€`}
+                {listing.type === 'rent' && '/month'}
+            </p>
+            </div>
+        </div>
+        )}
+
+
+      {/* Για να κάνει copy το url link */}
+      <div className='fixed top-[13%] right-[3%] z-10 text-2xl border rounded-full w-15 h-15 flex justify-center items-center cursor-pointer'>
+        <FaCopy className='text-blue-950'
+        onClick={() => {
+            navigator.clipboard.writeText(window.location.href)
+            setCopied(true);
+        }}
+        />
+      </div>
+      {copied && setTimeout(()=>{
+        setCopied(false)
+      },2000) &&
+      <p className='fixed top-[23%] right-[5%] z-10 rounded-lg '>Link copied</p>
+      }
+
+    </main>
+
+
+  );
+}
