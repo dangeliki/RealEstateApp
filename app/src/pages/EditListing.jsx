@@ -151,7 +151,7 @@ export default function EditListing() {
                     </div>
 
                     <div className='flex items-center gap-2'>
-                        <input type="number" id='price' min='1' max='999999999' required className='p-3 border border-gray-300 rounded-lg' onChange={handleChange} value={formData.price} />
+                        <input type="number" id='price' min='1' max='9999999999' required className='p-3 border border-gray-300 rounded-lg' onChange={handleChange} value={formData.price} />
                         
                         <div className='flex flex-col items-center'>
                             <p>Price</p>
