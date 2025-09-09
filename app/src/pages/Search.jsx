@@ -66,6 +66,8 @@ export default function Search() {
 
     }, [location.search]);
 
+    // Κουμπί show more αν οι εγγραφές ειναι πάνω από 9
+
     const onShowMoreClick = async () => {
         const numberOfListings = listings.length;
         const startIndex = numberOfListings;
