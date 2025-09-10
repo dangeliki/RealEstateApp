@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import OAth from '../components/OAth';
+import OAuth from '../components/OAuth';
 
 // Για να κρατάει το πεδίο όταν το συμπληρώσουμε και πάμε στο επόμενο πεδίο
 export default function Signup() {
@@ -62,9 +62,9 @@ export default function Signup() {
 
         {/* Κουμπί Google */}
         <button>
-          <OAth>
+          <OAuth>
                     
-          </OAth>
+          </OAuth>
         </button>
 
       </form>
