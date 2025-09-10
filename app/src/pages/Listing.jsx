@@ -81,7 +81,7 @@ export default function Listing() {
               </div>
 
 
-      <p className='text-slate-800'>
+      <p className='text-slate-800 break-words'>
         <span className='font-semibold text-black'>
           Description - {' '}
         </span>
