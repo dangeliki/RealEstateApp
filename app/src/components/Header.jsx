@@ -33,13 +33,10 @@ export default function Header() {
             {/* Logo */}
             <Link to='/'>
                 <h1 className='font-bold text-sm sm:text-2xl flex flex-wrap'>
-                    <span className='text-blue-500'>
-                        Real
+                    <span style={{color: '#FF7A3D'}} >
+                        Real 
                     </span>
-
-                    <span className='text-blue-800'>
-                        Estate
-                    </span>
+                    <span style={{color: '#FF9966'}}>Estate</span>
                 </h1>
             </Link>
 

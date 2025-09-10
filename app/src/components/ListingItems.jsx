@@ -7,7 +7,7 @@ export default function ListingItems({listing}) {
   return (
     <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-xl w-full sm:w-[330px]'>
 
-        <Link>
+        <Link to={`/listing/${listing._id}`}>
 
             {/* Εμφάνιση εικόνας */}
             <img className='h-[320px] sm:h-[220px] w-full object-cover hover:scale-110 transition-scale duration-300' src={realestateapp} alt="listing" />
