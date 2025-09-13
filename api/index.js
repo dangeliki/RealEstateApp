@@ -8,10 +8,11 @@ import cookieParser from 'cookie-parser';
 import adminRoutes from "./routes/admin.routes.js";
 import cors from "cors";
 
-dotenv.config({ path: "../.env" });
+console.log("MONGO_URI:", process.env.MONGO_URI);
+dotenv.config({ path: "./.env" });
 
 // Σύνδεση με την βάση 
-mongoose.connect(process.env.MONGO).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("Connected to database");
 }).catch((err) => {
     console.log(err);
