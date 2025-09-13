@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes , Route } from "react-router-dom"
 import Home from "./pages/home";
-import Signin from "./pages/signin";
-import Signup from "./pages/signup";
+import Signin from "./pages/Signin.jsx";
+import Signup from "./pages/Signup.jsx";
 import Profile from "./pages/Profile";
 import About from "./pages/about";
 import Header from "./components/Header";
@@ -10,6 +10,8 @@ import CreateListing from "./pages/CreateListing";
 import EditListing from "./pages/EditListing";
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
+import AdminRoute from "./components/AdminRoute.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
 
 export default function App() {
   return (
@@ -32,6 +34,9 @@ export default function App() {
       <Route path="/edit-listing/:listingId" element={<EditListing />}/>
       <Route path="/edit-listing/:listingId" element={<EditListing />}/>
     </Route>
+
+    <Route path="/users" element={<AdminPage />} />
+
     
   </Routes>
   </BrowserRouter>

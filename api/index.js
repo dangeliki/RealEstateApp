@@ -5,6 +5,8 @@ import userRouter from './routes/users.route.js';
 import listingRouter from './routes/listing.js'
 import authRouter from './routes/auth.js';
 import cookieParser from 'cookie-parser';
+import adminRoutes from "./routes/admin.routes.js";
+import cors from "cors";
 
 dotenv.config({ path: "../.env" });
 
@@ -30,6 +32,7 @@ app.listen(3000, () => {
 app.use("/api/user",userRouter);
 app.use("/api/auth",authRouter);
 app.use("/api/listing",listingRouter);
+app.use("/api/admin", adminRoutes);
 
 app.use((err,req,res,next) => {
     const statusCode = err.statusCode || 500;
@@ -40,3 +43,11 @@ app.use((err,req,res,next) => {
         message,
     });
 });
+
+// Για να κρατάει τα cookies
+app.use(cookieParser());
+
+app.use(cors({
+  origin: "http://localhost:5173", 
+  credentials: true,
+}));

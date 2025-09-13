@@ -18,23 +18,23 @@ export default function Profile() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  // Διαγραφή λογαριασμού χρήστη
-  const handleDeleteUser = async () => {
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
-  };
+  // // Διαγραφή λογαριασμού χρήστη
+  // const handleDeleteUser = async () => {
+  //   try {
+  //     dispatch(deleteUserStart());
+  //     const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+  //       method: 'DELETE',
+  //     });
+  //     const data = await res.json();
+  //     if (data.success === false) {
+  //       dispatch(deleteUserFailure(data.message));
+  //       return;
+  //     }
+  //     dispatch(deleteUserSuccess(data));
+  //   } catch (error) {
+  //     dispatch(deleteUserFailure(error.message));
+  //   }
+  // };
 
   // Sign Out
   const handleSignOut = async () => {
@@ -63,6 +63,7 @@ export default function Profile() {
         headers: {
           'Content-Type':'application/json',
         },
+        credentials: 'include',
         body:JSON.stringify(formData),
       });
       const data = await res.json();
@@ -137,9 +138,9 @@ export default function Profile() {
       </form>
 
       <div className='flex justify-between mt-5'>
-        <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>
+        {/* <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer'>
           Delete Account
-        </span>
+        </span> */}
         <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
           Sign Out
         </span>

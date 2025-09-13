@@ -53,18 +53,35 @@ export default function Header() {
 
             {/* Menu */}
             <ul className='flex gap-4'>
-                <Link to='/'>
-                    <li className='hidden sm:inline text-gray-500 hover:underline'>Home</li>
-                </Link>
-                <Link to='/about'>
-                    <li className='hidden sm:inline text-gray-500 hover:underline'>About</li>
-                </Link>
-                <Link to='/profile'>
-                {currentUser ? (<img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt=''/>) : (<li className=' text-gray-500 hover:underline'>Sign In</li>)}
-                </Link>
+            <Link to='/'>
+                <li className='hidden sm:inline text-gray-500 hover:underline'>Home</li>
+            </Link>
+            <Link to='/about'>
+                <li className='hidden sm:inline text-gray-500 hover:underline'>About</li>
+            </Link>
 
+            {/* ✅ Εμφανίζεται μόνο αν είναι admin */}
+            {currentUser?.role === 'admin' && (
+                <Link to='/users'>
+                <li className='hidden sm:inline text-gray-500 hover:underline'>
+                    Manage Users
+                </li>
+                </Link>
+            )}
 
+            <Link to='/profile'>
+                {currentUser ? (
+                <img
+                    className='rounded-full h-7 w-7 object-cover'
+                    src={currentUser.avatar}
+                    alt=''
+                />
+                ) : (
+                <li className='text-gray-500 hover:underline'>Sign In</li>
+                )}
+            </Link>
             </ul>
+
         </div>
     </header>
   )
